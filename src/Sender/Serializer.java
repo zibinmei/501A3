@@ -16,69 +16,97 @@ public class Serializer {
 		
 	}
 	
-	public org.jdom2.Document serialize(Object obj){
+	public org.jdom2.Document serialize(Object obj) throws IllegalArgumentException, IllegalAccessException{
 		root = new Element("serialized");
-		try {
-			addObject(obj);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		addIdentity(obj);
+		addObject(obj);
 		Document doc = new Document(root);
 		return doc;
 	}
 		
-	
+//use to add a node that is object	
 	private void addObject(Object obj) throws IllegalArgumentException, IllegalAccessException {
-
+//		add new object 
 		Class classObject = obj.getClass();
 		Element objectnode=root.addContent("object").setAttribute("class" , obj.getClass().getName());
-		objectnode.setAttribute("id",Integer.toString(newID));
-		map.put(newID, obj);
-		newID++;
+		objectnode.setAttribute("id",map.get(obj).toString());
 		Field[] fields= classObject.getDeclaredFields();
 		for (Field f : fields) {
 			f.setAccessible(true);
 			Element fieldnode=objectnode.addContent("field");
 			fieldnode.setAttribute("name",f.getName().toString());
 			fieldnode.setAttribute("declaringclass", f.getDeclaringClass().toString());
-			if (f.get(obj).getClass().isPrimitive())
-				fieldnode.addContent("value").setText(f.get(obj).toString());
-			else if(f.get(obj).getClass().isArray()) {
-				fieldnode.addContent("reference").setText(Integer.toString(newID));
-				addArrayObject(f.get(obj),newID);
-				map.put(newID, f.get(obj));
-				newID++;
+			Object fieldObj = f.get(obj);
+//			check the type of field
+			if (fieldObj.getClass().isPrimitive())
+				fieldnode.addContent("value").setText(fieldObj.toString());
+			else if(fieldObj.getClass().isArray()) {
+				if (map.containsKey(fieldObj)) 
+					fieldnode.addContent("reference").setText(map.get(fieldObj).toString());
+		
+				else {
+					String id = addIdentity(fieldObj);
+					fieldnode.addContent("reference").setText(id);
+					addArrayObject(fieldObj);
+					
+				}
 			}
 			else {
-				fieldnode.addContent("reference").setText(Integer.toString(newID));
-				map.put(newID, f.get(obj));
-				newID++;
-				addObject(f.get(obj));
+				if (map.containsKey(fieldObj))
+					fieldnode.addContent("reference").setText(map.get(fieldObj).toString());
+				else {
+					String id = addIdentity(fieldObj);
+					fieldnode.addContent("reference").setText(id);
+					addObject(fieldObj);
+				}
 			}
-
 		}
 
 		
 	}
-	
-	private void addArrayObject(Object arr,int id) {
+//	use to add node that is array object
+	private void addArrayObject(Object arr) throws IllegalArgumentException, IllegalAccessException {
+		Element objectnode =root.addContent("object");
+		
+//		attributes
+		objectnode.setAttribute("class",arr.getClass().getName());
+		objectnode.setAttribute("id",map.get(arr).toString());
+		objectnode.setAttribute("length",Integer.toString(Array.getLength(arr)));
+		
+//		contents
 		if(arr.getClass().getComponentType().isPrimitive()){
-			Element objectnode =root.addContent("object");
-			objectnode.setAttribute("class",arr.getClass().getName());
-			objectnode.setAttribute("id",Integer.toString(id));
-			objectnode.setAttribute("length",Integer.toString(Array.getLength(arr)));
 			for (int i = 0; i< Array.getLength(arr);i++) {
 				Object arr_ele= Array.get(arr, i);
 				objectnode.addContent("value").setText(arr_ele.toString());
 			}
 			
 		}
+		
 		else {
+			for (int i = 0; i< Array.getLength(arr);i++) {
+				Object arr_ele= Array.get(arr, i);
+				if (map.containsKey(arr_ele)) {
+					String objid = map.get(arr_ele).toString();
+					objectnode.addContent("reference").setText(objid);
+				}
+				else {
+					String id = addIdentity(arr_ele);
+					objectnode.addContent("reference").setText(id);
+					addObject(arr_ele);
+				}
+				
+				
+			}
+			
 			
 		}
 	}
+//	a helper for adding id to object
+	private String addIdentity(Object obj) {
+		int id =newID; 
+		map.put(obj, id);
+		newID++;
+		return Integer.toString(id);	
+	}
+
 }
