@@ -15,7 +15,7 @@ public class Serializer {
 		
 	}
 	
-	public org.jdom2.Document serialize(Object obj) throws IllegalArgumentException, IllegalAccessException{
+	public Document serialize(Object obj) throws IllegalArgumentException, IllegalAccessException{
 		root = new Element("serialized");
 		addIdentity(obj);
 		addObject(obj);
@@ -32,6 +32,8 @@ public class Serializer {
 		objectnode.setAttribute("class" , obj.getClass().getName());
 		objectnode.setAttribute("id",map.get(obj).toString());
 		Field[] fields= classObject.getDeclaredFields();
+
+//check all fields
 		for (Field f : fields) {
 			f.setAccessible(true);
 			Element fieldnode= new Element("field");
@@ -40,11 +42,17 @@ public class Serializer {
 			fieldnode.setAttribute("declaringclass", f.getDeclaringClass().getName());
 			Object fieldObj = f.get(obj);
 //			check the type of field
-			if (f.getType().isPrimitive()) {
-				Element value = new Element("value");
-				value.setText(fieldObj.toString());
+			if (fieldObj == null) {
+				Element value = new Element("reference");
+				value.setText("null");
 				fieldnode.addContent(value);
 			}
+			else if (f.getType().isPrimitive()) {
+				Element value = new Element("value");
+				value.setText(fieldObj.toString());				
+				fieldnode.addContent(value);
+			}
+			
 			else if(f.getType().isArray()) {
 				if (map.containsKey(fieldObj)) { 
 					Element ref = new Element("reference");
@@ -100,7 +108,12 @@ public class Serializer {
 		else {
 			for (int i = 0; i< Array.getLength(arr);i++) {
 				Object arr_ele= Array.get(arr, i);
-				if (map.containsKey(arr_ele)) {
+				if (arr_ele == null ) {
+					Element ref = new Element("reference");
+					objectnode.addContent(ref);
+					ref.setText("null");
+				}
+				else if (map.containsKey(arr_ele)) {
 					String objid = map.get(arr_ele).toString();
 					Element ref = new Element("ref");
 					objectnode.addContent(ref);

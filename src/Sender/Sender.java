@@ -12,17 +12,19 @@ import org.jdom2.output.*;
 
 public class Sender {
 
-	String server = "127.0.0.1";
-	int port = 8000;
 	Socket s;
-	public Sender() throws UnknownHostException, IOException {
-		s = new Socket(server ,port);
+	public Sender(String host,int port) throws UnknownHostException, IOException {
+		s = new Socket(host ,port);
 
 	}
 	
-	public void send() throws IOException {
+	public void send(Document doc) throws IOException {
 		OutputStream out = s.getOutputStream();
 		DataOutputStream dataOut = new DataOutputStream(out);
+		XMLOutputter x = new XMLOutputter();
+		x.setFormat(Format.getPrettyFormat());
+		x.output(doc, dataOut);
+		dataOut.flush();
 	}
 	public static void checker(Document doc) throws IOException {
 		XMLOutputter x = new XMLOutputter();

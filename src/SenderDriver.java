@@ -8,17 +8,14 @@ import org.jdom2.*;
 public class SenderDriver {
 	public static void main(String[] args) {
 		
-		Sender s;
+		
 		try {
-			Object a = new primitiveClass();
-			primitiveArrayClass b = new primitiveArrayClass();
-			collectionClass c = new collectionClass();
-			c.add(b);
-			objectClass o = new objectClass();
-			o.setObj1(b);
-			o.setObj2(a);
-			Document doc = new Serializer().serialize(o);
-			Sender.checker(doc);
+			Sender s = new Sender("localhost",9999);
+			ObjectCreator creator = new ObjectCreator();
+			creator.displayUI();
+			Object obj = creator.getObject();
+			Document doc = new Serializer().serialize(obj);
+			s.send(doc);
 		} 
 		catch(Exception e){
 			e.printStackTrace();

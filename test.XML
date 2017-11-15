@@ -1,29 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serialized>
-  <object class="Sender.objectClass" id="0">
-    <field name="obj1" declaringclass="Sender.objectClass">
+  <object class="Sender.collectionClass" id="0">
+    <field name="aList" declaringclass="Sender.collectionClass">
       <reference>1</reference>
     </field>
-    <field name="obj2" declaringclass="Sender.objectClass">
-      <reference>3</reference>
-    </field>
   </object>
-  <object class="Sender.primitiveArrayClass" id="1">
-    <field name="inArray" declaringclass="Sender.primitiveArrayClass">
+  <object class="java.util.ArrayList" id="1">
+    <field name="serialVersionUID" declaringclass="java.util.ArrayList">
+      <value>8683452581122892189</value>
+    </field>
+    <field name="DEFAULT_CAPACITY" declaringclass="java.util.ArrayList">
+      <value>10</value>
+    </field>
+    <field name="EMPTY_ELEMENTDATA" declaringclass="java.util.ArrayList">
       <reference>2</reference>
     </field>
+    <field name="DEFAULTCAPACITY_EMPTY_ELEMENTDATA" declaringclass="java.util.ArrayList">
+      <reference>3</reference>
+    </field>
+    <field name="elementData" declaringclass="java.util.ArrayList">
+      <reference>4</reference>
+    </field>
+    <field name="size" declaringclass="java.util.ArrayList">
+      <value>2</value>
+    </field>
+    <field name="MAX_ARRAY_SIZE" declaringclass="java.util.ArrayList">
+      <value>2147483639</value>
+    </field>
   </object>
-  <object class="[I" id="2" length="3">
+  <object class="[Ljava.lang.Object;" id="2" length="0" />
+  <object class="[Ljava.lang.Object;" id="3" length="0" />
+  <object class="[Ljava.lang.Object;" id="4" length="10">
+    <reference>5</reference>
+    <reference>7</reference>
+    <reference>null</reference>
+    <reference>null</reference>
+    <reference>null</reference>
+    <reference>null</reference>
+    <reference>null</reference>
+    <reference>null</reference>
+    <reference>null</reference>
+    <reference>null</reference>
+  </object>
+  <object class="Sender.primitiveArrayClass" id="5">
+    <field name="inArray" declaringclass="Sender.primitiveArrayClass">
+      <reference>6</reference>
+    </field>
+  </object>
+  <object class="[I" id="6" length="3">
     <value>1</value>
     <value>2</value>
     <value>3</value>
   </object>
-  <object class="Sender.primitiveClass" id="3">
+  <object class="Sender.objectClass" id="7">
+    <field name="obj1" declaringclass="Sender.objectClass">
+      <reference>8</reference>
+    </field>
+    <field name="obj2" declaringclass="Sender.objectClass">
+      <reference>9</reference>
+    </field>
+  </object>
+  <object class="Sender.primitiveClass" id="8">
     <field name="int1" declaringclass="Sender.primitiveClass">
       <value>0</value>
     </field>
-    <field name="bool1" declaringclass="Sender.primitiveClass">
-      <value>false</value>
+    <field name="char1" declaringclass="Sender.primitiveClass">
+      <value>a</value>
+    </field>
+    <field name="float1" declaringclass="Sender.primitiveClass">
+      <value>0.0</value>
+    </field>
+  </object>
+  <object class="Sender.primitiveClass" id="9">
+    <field name="int1" declaringclass="Sender.primitiveClass">
+      <value>0</value>
+    </field>
+    <field name="char1" declaringclass="Sender.primitiveClass">
+      <value>a</value>
     </field>
     <field name="float1" declaringclass="Sender.primitiveClass">
       <value>0.0</value>

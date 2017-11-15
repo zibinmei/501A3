@@ -1,22 +1,15 @@
 package Sender;
 import java.util.ArrayList;
+import java.util.*;
 public class collectionClass {
-	private ArrayList<Object> aList=new ArrayList<Object>();
+	private List<Object> aList=new ArrayList<Object>();
 
-	public ArrayList getaList() {
-		return aList;
-	}
+	public collectionClass() {
 
-	public void setaList(ArrayList a) {
-		this.aList = a;
+		aList.add(new primitiveArrayClass());
+		aList.add(new objectClass());
 	}
 	
-	public void add(Object obj) {
-		this.aList.add(obj);
-		
-	}
-	public void remove(Object obj) {
-		this.aList.remove(obj);
-	}
+
 
 }
