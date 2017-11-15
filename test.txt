@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serialized class="Sender.primitiveClass" id="0" name="float1" declaringclass="class Sender.primitiveClass">0.0</serialized>

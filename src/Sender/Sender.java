@@ -27,7 +27,7 @@ public class Sender {
 	public static void checker(Document doc) throws IOException {
 		XMLOutputter x = new XMLOutputter();
 		x.setFormat(Format.getPrettyFormat());
-		x.output(doc,new FileWriter("test.txt"));
+		x.output(doc,new FileWriter("test.XML"));
 	}
 		
 	

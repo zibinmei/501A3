@@ -1,5 +1,15 @@
 package Sender;
 
 public class objectArrayClass {
-	Object[] objArray;
+	private Object[] objArray;
+
+	public Object[] getObjArray() {
+		return objArray;
+	}
+
+	public void setObjArray(Object[] objArray) {
+		this.objArray = objArray;
+	}
+	
+	
 }

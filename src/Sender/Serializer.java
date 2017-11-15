@@ -27,37 +27,49 @@ public class Serializer {
 	private void addObject(Object obj) throws IllegalArgumentException, IllegalAccessException {
 //		add new object 
 		Class classObject = obj.getClass();
-		Element objectnode=root.addContent("object");
+		Element objectnode= new Element("object");
+		this.root.addContent(objectnode);
 		objectnode.setAttribute("class" , obj.getClass().getName());
 		objectnode.setAttribute("id",map.get(obj).toString());
 		Field[] fields= classObject.getDeclaredFields();
 		for (Field f : fields) {
 			f.setAccessible(true);
-			Element fieldnode=objectnode.addContent("field");
+			Element fieldnode= new Element("field");
+			objectnode.addContent(fieldnode);
 			fieldnode.setAttribute("name",f.getName().toString());
-			fieldnode.setAttribute("declaringclass", f.getDeclaringClass().toString());
+			fieldnode.setAttribute("declaringclass", f.getDeclaringClass().getName());
 			Object fieldObj = f.get(obj);
 //			check the type of field
-			if (fieldObj.getClass().isPrimitive()) {
-				fieldnode.addContent("value").setText(fieldObj.toString());
+			if (f.getType().isPrimitive()) {
+				Element value = new Element("value");
+				value.setText(fieldObj.toString());
+				fieldnode.addContent(value);
 			}
-			else if(fieldObj.getClass().isArray()) {
-				if (map.containsKey(fieldObj)) 
-					fieldnode.addContent("reference").setText(map.get(fieldObj).toString());
-		
+			else if(f.getType().isArray()) {
+				if (map.containsKey(fieldObj)) { 
+					Element ref = new Element("reference");
+					ref.setText(map.get(fieldObj).toString());
+					fieldnode.addContent(ref);
+				}
 				else {
+					Element ref = new Element("reference");
 					String id = addIdentity(fieldObj);
-					fieldnode.addContent("reference").setText(id);
+					ref.setText(id);
+					fieldnode.addContent(ref);
 					addArrayObject(fieldObj);
-					
 				}
 			}
-			else if (fieldObj.getClass().is){
-				if (map.containsKey(fieldObj))
-					fieldnode.addContent("reference").setText(map.get(fieldObj).toString());
+			else{
+				if (map.containsKey(fieldObj)) {
+					Element ref = new Element("reference");
+					ref.setText(map.get(fieldObj).toString());
+					fieldnode.addContent(ref);
+				}
 				else {
+					Element ref = new Element("reference");
 					String id = addIdentity(fieldObj);
-					fieldnode.addContent("reference").setText(id);
+					ref.setText(id);
+					fieldnode.addContent(ref);
 					addObject(fieldObj);
 				}
 			}
@@ -67,8 +79,8 @@ public class Serializer {
 	}
 //	use to add node that is array object
 	private void addArrayObject(Object arr) throws IllegalArgumentException, IllegalAccessException {
-		Element objectnode =root.addContent("object");
-		
+		Element objectnode = new Element("object");
+		this.root.addContent(objectnode);
 //		attributes
 		objectnode.setAttribute("class",arr.getClass().getName());
 		objectnode.setAttribute("id",map.get(arr).toString());
@@ -78,7 +90,9 @@ public class Serializer {
 		if(arr.getClass().getComponentType().isPrimitive()){
 			for (int i = 0; i< Array.getLength(arr);i++) {
 				Object arr_ele= Array.get(arr, i);
-				objectnode.addContent("value").setText(arr_ele.toString());
+				Element value = new Element("value");
+				value.setText(arr_ele.toString());
+				objectnode.addContent(value);
 			}
 			
 		}
@@ -88,11 +102,15 @@ public class Serializer {
 				Object arr_ele= Array.get(arr, i);
 				if (map.containsKey(arr_ele)) {
 					String objid = map.get(arr_ele).toString();
-					objectnode.addContent("reference").setText(objid);
+					Element ref = new Element("ref");
+					objectnode.addContent(ref);
+					ref.setText(objid);
 				}
 				else {
 					String id = addIdentity(arr_ele);
-					objectnode.addContent("reference").setText(id);
+					Element ref = new Element("reference");
+					objectnode.addContent(ref);
+					ref.setText(id);
 					addObject(arr_ele);
 				}
 				
