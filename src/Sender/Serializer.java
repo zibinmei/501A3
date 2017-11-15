@@ -2,7 +2,6 @@ package Sender;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.*;
-
 import org.jdom2.*;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
@@ -28,7 +27,8 @@ public class Serializer {
 	private void addObject(Object obj) throws IllegalArgumentException, IllegalAccessException {
 //		add new object 
 		Class classObject = obj.getClass();
-		Element objectnode=root.addContent("object").setAttribute("class" , obj.getClass().getName());
+		Element objectnode=root.addContent("object");
+		objectnode.setAttribute("class" , obj.getClass().getName());
 		objectnode.setAttribute("id",map.get(obj).toString());
 		Field[] fields= classObject.getDeclaredFields();
 		for (Field f : fields) {
@@ -38,8 +38,9 @@ public class Serializer {
 			fieldnode.setAttribute("declaringclass", f.getDeclaringClass().toString());
 			Object fieldObj = f.get(obj);
 //			check the type of field
-			if (fieldObj.getClass().isPrimitive())
+			if (fieldObj.getClass().isPrimitive()) {
 				fieldnode.addContent("value").setText(fieldObj.toString());
+			}
 			else if(fieldObj.getClass().isArray()) {
 				if (map.containsKey(fieldObj)) 
 					fieldnode.addContent("reference").setText(map.get(fieldObj).toString());
@@ -51,7 +52,7 @@ public class Serializer {
 					
 				}
 			}
-			else {
+			else if (fieldObj.getClass().is){
 				if (map.containsKey(fieldObj))
 					fieldnode.addContent("reference").setText(map.get(fieldObj).toString());
 				else {
