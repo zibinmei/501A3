@@ -29,6 +29,7 @@ public class Receiver {
 		
 		Socket conn = s_socket.accept();
 		System.out.println("Connected to: "+ conn);
+		System.out.println(">>>>>>>Visualizer<<<<<<<");
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		SAXBuilder builder= new SAXBuilder();
 		Document doc = builder.build(in);
