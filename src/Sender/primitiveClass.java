@@ -4,6 +4,8 @@ public class primitiveClass {
 	private int int1 = 0;
 	private char char1= 'a';
 	private float float1 = (float) 0.0;
+	
+	
 	public int getInt1() {
 		return int1;
 	}

@@ -31,16 +31,27 @@ public class Deserializer {
 		return MainObject;
 	}
 	private Object objCreator(Element objectnode) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-		String classname =objectnode.getAttribute("class").toString();
+//create object instance		
+		String classname =objectnode.getAttribute("class").getValue();
 		Class<?> c= Class.forName(classname);
 		Constructor<?> cons = c.getConstructor();
 		Object obj = cons.newInstance();
+//		System.out.println(obj.getClass().getName());
 		List<Element> allfields= objectnode.getChildren();
-		for (Element fieldNode: allfields) {
+		for (int i = 0; i< allfields.size();i++) {
+			//get the data from xml
+			Element fieldNode = allfields.get(i);
+			Field[] fields =obj.getClass().getDeclaredFields();
+			Field f = fields[i];
+			f.setAccessible(true);
 			String name =fieldNode.getAttribute("name").toString();
 			String declaringclass = fieldNode.getAttribute("declaringclass").toString();
-			String value = fieldNode.getContent().toString();
-			obj.getClass().getDeclaredField()
+			String value = fieldNode.getChildText("value");
+			System.out.println(value);
+			f.set(obj, f.getType().cast(value));
+			System.out.println(f.get(obj).toString());
+
+			
 			
 		}
 		return obj;
