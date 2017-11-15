@@ -1,85 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serialized>
-  <object class="Sender.collectionClass" id="0">
-    <field name="aList" declaringclass="Sender.collectionClass">
+  <object class="Sender.objectArrayClass" id="0">
+    <field name="objArray" declaringclass="Sender.objectArrayClass">
       <reference>1</reference>
     </field>
   </object>
-  <object class="java.util.ArrayList" id="1">
-    <field name="serialVersionUID" declaringclass="java.util.ArrayList">
-      <value>8683452581122892189</value>
+  <object class="[Ljava.lang.Object;" id="1" length="3">
+    <reference>2</reference>
+    <reference>3</reference>
+    <reference>6</reference>
+  </object>
+  <object class="Sender.primitiveClass" id="2">
+    <field name="int1" declaringclass="Sender.primitiveClass">
+      <value>0</value>
     </field>
-    <field name="DEFAULT_CAPACITY" declaringclass="java.util.ArrayList">
-      <value>10</value>
+    <field name="char1" declaringclass="Sender.primitiveClass">
+      <value>a</value>
     </field>
-    <field name="EMPTY_ELEMENTDATA" declaringclass="java.util.ArrayList">
-      <reference>2</reference>
+    <field name="float1" declaringclass="Sender.primitiveClass">
+      <value>0.0</value>
     </field>
-    <field name="DEFAULTCAPACITY_EMPTY_ELEMENTDATA" declaringclass="java.util.ArrayList">
-      <reference>3</reference>
-    </field>
-    <field name="elementData" declaringclass="java.util.ArrayList">
+  </object>
+  <object class="Sender.objectClass" id="3">
+    <field name="obj1" declaringclass="Sender.objectClass">
       <reference>4</reference>
     </field>
-    <field name="size" declaringclass="java.util.ArrayList">
-      <value>2</value>
-    </field>
-    <field name="MAX_ARRAY_SIZE" declaringclass="java.util.ArrayList">
-      <value>2147483639</value>
+    <field name="obj2" declaringclass="Sender.objectClass">
+      <reference>5</reference>
     </field>
   </object>
-  <object class="[Ljava.lang.Object;" id="2" length="0" />
-  <object class="[Ljava.lang.Object;" id="3" length="0" />
-  <object class="[Ljava.lang.Object;" id="4" length="10">
-    <reference>5</reference>
-    <reference>7</reference>
-    <reference>null</reference>
-    <reference>null</reference>
-    <reference>null</reference>
-    <reference>null</reference>
-    <reference>null</reference>
-    <reference>null</reference>
-    <reference>null</reference>
-    <reference>null</reference>
+  <object class="Sender.primitiveClass" id="4">
+    <field name="int1" declaringclass="Sender.primitiveClass">
+      <value>0</value>
+    </field>
+    <field name="char1" declaringclass="Sender.primitiveClass">
+      <value>a</value>
+    </field>
+    <field name="float1" declaringclass="Sender.primitiveClass">
+      <value>0.0</value>
+    </field>
   </object>
-  <object class="Sender.primitiveArrayClass" id="5">
+  <object class="Sender.primitiveClass" id="5">
+    <field name="int1" declaringclass="Sender.primitiveClass">
+      <value>0</value>
+    </field>
+    <field name="char1" declaringclass="Sender.primitiveClass">
+      <value>a</value>
+    </field>
+    <field name="float1" declaringclass="Sender.primitiveClass">
+      <value>0.0</value>
+    </field>
+  </object>
+  <object class="Sender.primitiveArrayClass" id="6">
     <field name="inArray" declaringclass="Sender.primitiveArrayClass">
-      <reference>6</reference>
+      <reference>7</reference>
     </field>
   </object>
-  <object class="[I" id="6" length="3">
+  <object class="[I" id="7" length="3">
     <value>1</value>
     <value>2</value>
     <value>3</value>
-  </object>
-  <object class="Sender.objectClass" id="7">
-    <field name="obj1" declaringclass="Sender.objectClass">
-      <reference>8</reference>
-    </field>
-    <field name="obj2" declaringclass="Sender.objectClass">
-      <reference>9</reference>
-    </field>
-  </object>
-  <object class="Sender.primitiveClass" id="8">
-    <field name="int1" declaringclass="Sender.primitiveClass">
-      <value>0</value>
-    </field>
-    <field name="char1" declaringclass="Sender.primitiveClass">
-      <value>a</value>
-    </field>
-    <field name="float1" declaringclass="Sender.primitiveClass">
-      <value>0.0</value>
-    </field>
-  </object>
-  <object class="Sender.primitiveClass" id="9">
-    <field name="int1" declaringclass="Sender.primitiveClass">
-      <value>0</value>
-    </field>
-    <field name="char1" declaringclass="Sender.primitiveClass">
-      <value>a</value>
-    </field>
-    <field name="float1" declaringclass="Sender.primitiveClass">
-      <value>0.0</value>
-    </field>
   </object>
 </serialized>

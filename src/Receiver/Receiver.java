@@ -20,6 +20,7 @@ public class Receiver {
 	public Receiver(int port) throws IOException {
 
 		s_socket = new ServerSocket(port);
+		System.out.println("listening on port: " + port);
 		s_socket.setSoTimeout(100000);
 
 	}

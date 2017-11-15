@@ -16,6 +16,7 @@ public class SenderDriver {
 			Object obj = creator.getObject();
 			Document doc = new Serializer().serialize(obj);
 			s.send(doc);
+			s.checker(doc);
 		} 
 		catch(Exception e){
 			e.printStackTrace();
